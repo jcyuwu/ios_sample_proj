@@ -69,8 +69,6 @@
 }
 
 - (Scene *)createScene {
-    [self fetchScene];
-    
     Scene *scene = [[Scene alloc] init];
     [self.privateScenes addObject:scene];
     return scene;
@@ -82,8 +80,19 @@
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        self.privateScenes = [jsonObject valueForKeyPath:@"result.results"];
+        
+        for (NSDictionary *dict in [jsonObject valueForKeyPath:@"result.results"]) {
+            NSString *name = [dict valueForKeyPath:@"Name"];
+            NSString *parkName = [dict valueForKeyPath:@"ParkName"];
+            Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName];
+            [self.privateScenes addObject:scene];
+            NSLog(@"%@", scene.name);
+        }
         NSLog(@"%@", self.privateScenes);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"fetchSceneCallback" object:nil userInfo:nil];
+        });
     }];
     [dataTask resume];
 }

@@ -26,7 +26,7 @@
 
 - (void)loadView {
     [super loadView];
-    [[SceneStore sharedStore] createScene];
+    [[SceneStore sharedStore] fetchScene];
 }
 
 - (void)viewDidLoad {
@@ -37,9 +37,25 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchSceneCallback:) name:@"fetchSceneCallback" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fetchSceneCallback" object:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)fetchSceneCallback:(NSNotification *)note {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 #pragma mark - Table view data source

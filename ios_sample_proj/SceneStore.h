@@ -14,5 +14,6 @@
 @property (nonatomic, readonly) NSArray *allScenes;
 + (instancetype)sharedStore;
 - (Scene *)createScene;
+- (void)fetchScene;
 
 @end
