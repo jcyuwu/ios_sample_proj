@@ -7,6 +7,8 @@
 //
 
 #import "SceneTableViewController.h"
+#import "SceneStore.h"
+#import "Scene.h"
 
 @interface SceneTableViewController ()
 
@@ -14,12 +16,23 @@
 
 @implementation SceneTableViewController
 
+/*- (instancetype)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    if (self) {
+        [[SceneStore sharedStore] createScene];
+    }
+    return self;
+}*/
+
+- (void)loadView {
+    [super loadView];
+    [[SceneStore sharedStore] createScene];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -32,15 +45,18 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [[[SceneStore sharedStore] allScenes] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scene cell" forIndexPath:indexPath];
+    NSArray *scenes = [[SceneStore sharedStore] allScenes];
+    Scene *scene = scenes[indexPath.row];
+    cell.textLabel.text = scene.name;
     
     return cell;
 }

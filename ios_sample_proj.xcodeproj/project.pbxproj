@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2922ED4F203413660027CC5D /* SceneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2922ED4E203413660027CC5D /* SceneTableViewController.m */; };
+		2922ED522034192A0027CC5D /* SceneStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2922ED512034192A0027CC5D /* SceneStore.m */; };
+		2922ED5520341DE40027CC5D /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2922ED5420341DE40027CC5D /* Scene.m */; };
 		29E959B42033EA7E00A1E082 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E959B32033EA7E00A1E082 /* AppDelegate.m */; };
 		29E959B72033EA7E00A1E082 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E959B62033EA7E00A1E082 /* ViewController.m */; };
 		29E959BA2033EA7E00A1E082 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E959B82033EA7E00A1E082 /* Main.storyboard */; };
@@ -19,6 +21,10 @@
 /* Begin PBXFileReference section */
 		2922ED4D203413660027CC5D /* SceneTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneTableViewController.h; sourceTree = "<group>"; };
 		2922ED4E203413660027CC5D /* SceneTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneTableViewController.m; sourceTree = "<group>"; };
+		2922ED502034192A0027CC5D /* SceneStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneStore.h; sourceTree = "<group>"; };
+		2922ED512034192A0027CC5D /* SceneStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneStore.m; sourceTree = "<group>"; };
+		2922ED5320341DE40027CC5D /* Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		2922ED5420341DE40027CC5D /* Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
 		29E959AF2033EA7E00A1E082 /* ios_sample_proj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios_sample_proj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29E959B22033EA7E00A1E082 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		29E959B32033EA7E00A1E082 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -67,6 +73,10 @@
 				29E959B82033EA7E00A1E082 /* Main.storyboard */,
 				2922ED4D203413660027CC5D /* SceneTableViewController.h */,
 				2922ED4E203413660027CC5D /* SceneTableViewController.m */,
+				2922ED502034192A0027CC5D /* SceneStore.h */,
+				2922ED512034192A0027CC5D /* SceneStore.m */,
+				2922ED5320341DE40027CC5D /* Scene.h */,
+				2922ED5420341DE40027CC5D /* Scene.m */,
 				29E959B52033EA7E00A1E082 /* ViewController.h */,
 				29E959B62033EA7E00A1E082 /* ViewController.m */,
 				29E959BD2033EA7E00A1E082 /* LaunchScreen.storyboard */,
@@ -147,8 +157,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2922ED5520341DE40027CC5D /* Scene.m in Sources */,
 				29E959B72033EA7E00A1E082 /* ViewController.m in Sources */,
 				29E959C22033EA7E00A1E082 /* main.m in Sources */,
+				2922ED522034192A0027CC5D /* SceneStore.m in Sources */,
 				2922ED4F203413660027CC5D /* SceneTableViewController.m in Sources */,
 				29E959B42033EA7E00A1E082 /* AppDelegate.m in Sources */,
 			);
