@@ -8,6 +8,7 @@
 
 #import "SceneStore.h"
 #import "Scene.h"
+#import "ImageStore.h"
 
 @interface SceneStore ()
 
@@ -44,6 +45,12 @@
 
 - (NSArray *)allScenes {
     return self.privateScenes;
+}
+
+- (void)removeScene:(Scene *)scene {
+    NSString *key = scene.sceneKey;
+    [[ImageStore sharedStore] deleteImageForKey:key];
+    [self.privateScenes removeObjectIdenticalTo:scene];
 }
 
 - (Scene *)createScene {

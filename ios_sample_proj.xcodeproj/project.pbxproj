@@ -16,6 +16,7 @@
 		29E959BC2033EA7E00A1E082 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29E959BB2033EA7E00A1E082 /* Assets.xcassets */; };
 		29E959BF2033EA7E00A1E082 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E959BD2033EA7E00A1E082 /* LaunchScreen.storyboard */; };
 		29E959C22033EA7E00A1E082 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E959C12033EA7E00A1E082 /* main.m */; };
+		29EFBF5A20345E4900385FCE /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EFBF5920345E4900385FCE /* ImageStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		29E959BE2033EA7E00A1E082 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29E959C02033EA7E00A1E082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29E959C12033EA7E00A1E082 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29EFBF5820345E4900385FCE /* ImageStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
+		29EFBF5920345E4900385FCE /* ImageStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 				2922ED512034192A0027CC5D /* SceneStore.m */,
 				2922ED5320341DE40027CC5D /* Scene.h */,
 				2922ED5420341DE40027CC5D /* Scene.m */,
+				29EFBF5820345E4900385FCE /* ImageStore.h */,
+				29EFBF5920345E4900385FCE /* ImageStore.m */,
 				29E959B52033EA7E00A1E082 /* ViewController.h */,
 				29E959B62033EA7E00A1E082 /* ViewController.m */,
 				29E959BD2033EA7E00A1E082 /* LaunchScreen.storyboard */,
@@ -159,6 +164,7 @@
 			files = (
 				2922ED5520341DE40027CC5D /* Scene.m in Sources */,
 				29E959B72033EA7E00A1E082 /* ViewController.m in Sources */,
+				29EFBF5A20345E4900385FCE /* ImageStore.m in Sources */,
 				29E959C22033EA7E00A1E082 /* main.m in Sources */,
 				2922ED522034192A0027CC5D /* SceneStore.m in Sources */,
 				2922ED4F203413660027CC5D /* SceneTableViewController.m in Sources */,
