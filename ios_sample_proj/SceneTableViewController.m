@@ -26,6 +26,7 @@
 
 - (void)loadView {
     [super loadView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchSceneCallback:) name:@"fetchSceneCallback" object:nil];
     [[SceneStore sharedStore] fetchScene];
 }
 
@@ -39,17 +40,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchSceneCallback:) name:@"fetchSceneCallback" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fetchSceneCallback" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fetchSceneCallback" object:nil];
 }
 
 - (void)fetchSceneCallback:(NSNotification *)note {
