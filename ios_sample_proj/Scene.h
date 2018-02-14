@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Scene : NSObject
+@interface Scene : NSObject <NSCoding>
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *parkName;

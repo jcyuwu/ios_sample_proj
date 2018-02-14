@@ -24,8 +24,24 @@
 }
 
 - (NSString *)description {
-    NSString *descriptionString = [NSString stringWithFormat:@"name:%@ park:%@", @"急公好義坊", @"二二八和平公園"];
+    NSString *descriptionString = [NSString stringWithFormat:@"name:%@ park:%@", self.name, self.parkName];
     return descriptionString;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        _name = [aDecoder decodeObjectForKey:@"name"];
+        _parkName = [aDecoder decodeObjectForKey:@"parkName"];
+        _sceneKey = [aDecoder decodeObjectForKey:@"sceneKey"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.parkName forKey:@"parkName"];
+    [aCoder encodeObject:self.sceneKey forKey:@"sceneKey"];
 }
 
 @end

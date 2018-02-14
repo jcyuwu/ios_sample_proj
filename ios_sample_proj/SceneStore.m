@@ -36,7 +36,11 @@
 - (instancetype)initPrivate {
     self = [super init];
     if (self) {
-        _privateScenes = [[NSMutableArray alloc] init];
+        NSString *path = [self sceneArchivePath];
+        _privateScenes = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        if (!_privateScenes) {
+            _privateScenes = [[NSMutableArray alloc] init];
+        }
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         _session = [NSURLSession sessionWithConfiguration:config delegate:nil delegateQueue:nil];
     }
@@ -53,10 +57,21 @@
     [self.privateScenes removeObjectIdenticalTo:scene];
 }
 
+- (NSString *)sceneArchivePath {
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [documentDirectories firstObject];
+    return [documentDirectory stringByAppendingPathComponent:@"Scenes.archive"];
+}
+
+- (BOOL)saveChanges {
+    NSString *path = [self sceneArchivePath];
+    return [NSKeyedArchiver archiveRootObject:self.privateScenes toFile:path];
+}
+
 - (Scene *)createScene {
     [self fetchScene];
     
-    Scene *scene = [[Scene alloc] initWithSceneName:@"急公好義坊" parkName:@"二二八和平公園"];
+    Scene *scene = [[Scene alloc] init];
     [self.privateScenes addObject:scene];
     return scene;
 }
