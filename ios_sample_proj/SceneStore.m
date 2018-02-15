@@ -75,26 +75,30 @@
 }
 
 - (void)fetchScene {
-    NSString *requestString = @"http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=bf073841-c734-49bf-a97f-3757a6013812";
-    NSURL *url = [NSURL URLWithString:requestString];
-    NSURLRequest *req = [NSURLRequest requestWithURL:url];
-    NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[self sceneArchivePath]]) {
+        NSString *requestString = @"http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=bf073841-c734-49bf-a97f-3757a6013812";
+        NSURL *url = [NSURL URLWithString:requestString];
+        NSURLRequest *req = [NSURLRequest requestWithURL:url];
+        NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            
+            for (NSDictionary *dict in [jsonObject valueForKeyPath:@"result.results"]) {
+                NSString *name = [dict valueForKeyPath:@"Name"];
+                NSString *parkName = [dict valueForKeyPath:@"ParkName"];
+                Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName];
+                [self.privateScenes addObject:scene];
+                NSLog(@"%@", scene.name);
+            }
+            [self saveChanges];
+            NSLog(@"%@", self.privateScenes);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"fetchSceneCallback" object:nil userInfo:nil];
+            });
+        }];
+        [dataTask resume];
         
-        for (NSDictionary *dict in [jsonObject valueForKeyPath:@"result.results"]) {
-            NSString *name = [dict valueForKeyPath:@"Name"];
-            NSString *parkName = [dict valueForKeyPath:@"ParkName"];
-            Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName];
-            [self.privateScenes addObject:scene];
-            NSLog(@"%@", scene.name);
-        }
-        NSLog(@"%@", self.privateScenes);
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"fetchSceneCallback" object:nil userInfo:nil];
-        });
-    }];
-    [dataTask resume];
+    }
 }
 
 @end
