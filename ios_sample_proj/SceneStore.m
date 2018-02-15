@@ -13,6 +13,7 @@
 @interface SceneStore ()
 
 @property (nonatomic) NSMutableArray *privateScenes;
+@property (nonatomic) NSMutableDictionary<NSString *, NSMutableArray *> *parkToScenes;
 @property (nonatomic) NSURLSession *session;
 
 @end
@@ -38,6 +39,14 @@
     if (self) {
         NSString *path = [self sceneArchivePath];
         _privateScenes = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        _parkToScenes = [[NSMutableDictionary alloc] init];
+        for (Scene *scene in _privateScenes) {
+            if (![[_parkToScenes allKeys] containsObject:scene.parkName]) {
+                _parkToScenes[scene.parkName] = [NSMutableArray arrayWithObject:scene];
+            } else {
+                [_parkToScenes[scene.parkName] addObject:scene];
+            }
+        }
         if (!_privateScenes) {
             _privateScenes = [[NSMutableArray alloc] init];
         }
