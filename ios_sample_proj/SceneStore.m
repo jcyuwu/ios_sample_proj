@@ -39,6 +39,10 @@
     if (self) {
         NSString *path = [self sceneArchivePath];
         _privateScenes = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        if (!_privateScenes) {
+            _privateScenes = [[NSMutableArray alloc] init];
+        }
+        
         _parkToScenes = [[NSMutableDictionary alloc] init];
         for (Scene *scene in _privateScenes) {
             if (![[_parkToScenes allKeys] containsObject:scene.parkName]) {
@@ -47,9 +51,7 @@
                 [_parkToScenes[scene.parkName] addObject:scene];
             }
         }
-        if (!_privateScenes) {
-            _privateScenes = [[NSMutableArray alloc] init];
-        }
+        
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         _session = [NSURLSession sessionWithConfiguration:config delegate:nil delegateQueue:nil];
     }
@@ -89,8 +91,8 @@
         NSURL *url = [NSURL URLWithString:requestString];
         NSURLRequest *req = [NSURLRequest requestWithURL:url];
         NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             for (NSDictionary *dict in [jsonObject valueForKeyPath:@"result.results"]) {
                 NSString *name = [dict valueForKeyPath:@"Name"];
                 NSString *parkName = [dict valueForKeyPath:@"ParkName"];
@@ -98,15 +100,22 @@
                 [self.privateScenes addObject:scene];
                 NSLog(@"%@", scene.name);
             }
+            
+            for (Scene *scene in self.privateScenes) {
+                if (![[self.parkToScenes allKeys] containsObject:scene.parkName]) {
+                    self.parkToScenes[scene.parkName] = [NSMutableArray arrayWithObject:scene];
+                } else {
+                    [self.parkToScenes[scene.parkName] addObject:scene];
+                }
+            }
             [self saveChanges];
-            NSLog(@"%@", self.privateScenes);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"fetchSceneCallback" object:nil userInfo:nil];
             });
+            
         }];
         [dataTask resume];
-        
     }
 }
 
