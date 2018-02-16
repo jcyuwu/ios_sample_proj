@@ -64,20 +64,24 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return [[SceneStore sharedStore].arrParkToScenes count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[SceneStore sharedStore] allScenes] count];
+    return [[SceneStore sharedStore].arrParkToScenes[section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scene cell" forIndexPath:indexPath];
-    NSArray *scenes = [[SceneStore sharedStore] allScenes];
-    Scene *scene = scenes[indexPath.row];
+    Scene *scene = [SceneStore sharedStore].arrParkToScenes[indexPath.section][indexPath.row];
     cell.textLabel.text = scene.name;
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    Scene *scene = [[SceneStore sharedStore].arrParkToScenes[section] firstObject];
+    return scene.parkName;
 }
 
 /*

@@ -13,7 +13,8 @@
 @interface SceneStore ()
 
 @property (nonatomic) NSMutableArray *privateScenes;
-@property (nonatomic) NSMutableDictionary<NSString *, NSMutableArray *> *parkToScenes;
+@property (nonatomic) NSMutableDictionary<NSString *, NSMutableArray *> *dictParkToScenes;
+@property (nonatomic) NSArray<NSMutableArray *> *privateArrParkToScenes;
 @property (nonatomic) NSURLSession *session;
 
 @end
@@ -43,23 +44,38 @@
             _privateScenes = [[NSMutableArray alloc] init];
         }
         
-        _parkToScenes = [[NSMutableDictionary alloc] init];
-        for (Scene *scene in _privateScenes) {
-            if (![[_parkToScenes allKeys] containsObject:scene.parkName]) {
-                _parkToScenes[scene.parkName] = [NSMutableArray arrayWithObject:scene];
-            } else {
-                [_parkToScenes[scene.parkName] addObject:scene];
-            }
-        }
-        
+        _dictParkToScenes = [[NSMutableDictionary alloc] init];
+        _privateArrParkToScenes = [[NSArray<NSMutableArray *> alloc] init];
+        [self configureParkToScenes];
+
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         _session = [NSURLSession sessionWithConfiguration:config delegate:nil delegateQueue:nil];
     }
     return self;
 }
 
+- (void)configureParkToScenes {
+    for (Scene *scene in _privateScenes) {
+        if (![[_dictParkToScenes allKeys] containsObject:scene.parkName]) {
+            _dictParkToScenes[scene.parkName] = [NSMutableArray arrayWithObject:scene];
+        } else {
+            [_dictParkToScenes[scene.parkName] addObject:scene];
+        }
+    }
+    
+    _privateArrParkToScenes = [[_dictParkToScenes allValues] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = [(Scene *)[(NSArray *)a firstObject] parkName];
+        NSString *second = [(Scene *)[(NSArray *)b firstObject] parkName];
+        return [first localizedCaseInsensitiveCompare:second];
+    }];
+}
+
 - (NSArray *)allScenes {
     return self.privateScenes;
+}
+
+- (NSArray<NSArray *> *)arrParkToScenes {
+    return self.privateArrParkToScenes;
 }
 
 - (void)removeScene:(Scene *)scene {
@@ -101,13 +117,7 @@
                 NSLog(@"%@", scene.name);
             }
             
-            for (Scene *scene in self.privateScenes) {
-                if (![[self.parkToScenes allKeys] containsObject:scene.parkName]) {
-                    self.parkToScenes[scene.parkName] = [NSMutableArray arrayWithObject:scene];
-                } else {
-                    [self.parkToScenes[scene.parkName] addObject:scene];
-                }
-            }
+            [self configureParkToScenes];
             [self saveChanges];
             
             dispatch_async(dispatch_get_main_queue(), ^{

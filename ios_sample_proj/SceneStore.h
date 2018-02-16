@@ -12,6 +12,7 @@
 @interface SceneStore : NSObject
 
 @property (nonatomic, readonly) NSArray *allScenes;
+@property (nonatomic, readonly) NSArray<NSArray *> *arrParkToScenes;
 + (instancetype)sharedStore;
 - (Scene *)createScene;
 - (void)fetchScene;
