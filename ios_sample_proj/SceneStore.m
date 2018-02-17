@@ -112,7 +112,8 @@
             for (NSDictionary *dict in [jsonObject valueForKeyPath:@"result.results"]) {
                 NSString *name = [dict valueForKeyPath:@"Name"];
                 NSString *parkName = [dict valueForKeyPath:@"ParkName"];
-                Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName];
+                NSString *introduction = [dict valueForKeyPath:@"Introduction"];
+                Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName introduction:introduction];
                 [self.privateScenes addObject:scene];
                 NSLog(@"%@", scene.name);
             }

@@ -10,17 +10,18 @@
 
 @implementation Scene
 
-- (instancetype)initWithSceneName:(NSString *)name parkName:(NSString *)park {
+- (instancetype)initWithSceneName:(NSString *)name parkName:(NSString *)park introduction:(NSString *)intro {
     self = [super init];
     if (self) {
         _name = name;
         _parkName = park;
+        _introduction = intro;
     }
     return self;
 }
 
 - (instancetype)init {
-    return [self initWithSceneName:@"急公好義坊" parkName:@"二二八和平公園"];
+    return [self initWithSceneName:@"急公好義坊" parkName:@"二二八和平公園" introduction:@"臺北府淡水縣貢生洪騰雲，因臺北府城建造考棚行署，捐獻田地銀兩有功，巡府劉銘傳奏請建坊獎勵，於光緒14年西元1888年坊成，原立於今衡陽路上，至日據時期拆遷至現址，雕琢精美，為臺北最典型之清代石坊。"];
 }
 
 - (NSString *)description {
@@ -34,6 +35,7 @@
         _name = [aDecoder decodeObjectForKey:@"name"];
         _parkName = [aDecoder decodeObjectForKey:@"parkName"];
         _sceneKey = [aDecoder decodeObjectForKey:@"sceneKey"];
+        _introduction = [aDecoder decodeObjectForKey:@"introduction"];
     }
     return self;
 }
@@ -42,6 +44,7 @@
     [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.parkName forKey:@"parkName"];
     [aCoder encodeObject:self.sceneKey forKey:@"sceneKey"];
+    [aCoder encodeObject:self.introduction forKey:@"introduction"];
 }
 
 @end

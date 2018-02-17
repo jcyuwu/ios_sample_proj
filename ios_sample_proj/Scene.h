@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *parkName;
 @property (nonatomic, copy) NSString *sceneKey;
-- (instancetype)initWithSceneName:(NSString *)name parkName:(NSString *)park;
+@property (nonatomic, copy) NSString *introduction;
+- (instancetype)initWithSceneName:(NSString *)name parkName:(NSString *)park introduction:(NSString *)intro;
 
 @end
