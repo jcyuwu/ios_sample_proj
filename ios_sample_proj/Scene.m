@@ -7,6 +7,7 @@
 //
 
 #import "Scene.h"
+#import <UIKit/UIKit.h>
 
 @implementation Scene
 
@@ -39,6 +40,7 @@
         _imageKey = [aDecoder decodeObjectForKey:@"imageKey"];
         _introduction = [aDecoder decodeObjectForKey:@"introduction"];
         _openTime = [aDecoder decodeObjectForKey:@"openTime"];
+        _thumbnail = [aDecoder decodeObjectForKey:@"thumbnail"];
     }
     return self;
 }
@@ -49,6 +51,29 @@
     [aCoder encodeObject:self.imageKey forKey:@"imageKey"];
     [aCoder encodeObject:self.introduction forKey:@"introduction"];
     [aCoder encodeObject:self.openTime forKey:@"openTime"];
+    [aCoder encodeObject:self.thumbnail forKey:@"thumbnail"];
+}
+
+- (void)setThumbnailFromImage:(UIImage *)image {
+    CGSize originImageSize = image.size;
+    CGRect newRect = CGRectMake(0, 0, 40, 40);
+    float ratio = MAX(newRect.size.width / originImageSize.width, newRect.size.height / originImageSize.height);
+    
+    UIGraphicsBeginImageContextWithOptions(newRect.size, NO, 0.0);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:newRect cornerRadius:5.0];
+    [path addClip];
+    
+    CGRect projectRect;
+    projectRect.size.width = ratio * originImageSize.width;
+    projectRect.size.height = ratio * originImageSize.height;
+    projectRect.origin.x = (newRect.size.width - projectRect.size.width) / 2.0;
+    projectRect.origin.y = (newRect.size.height - projectRect.size.height) / 2.0;
+    
+    [image drawInRect:projectRect];
+    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
+    self.thumbnail = smallImage;
+    
+    UIGraphicsEndImageContext();
 }
 
 @end

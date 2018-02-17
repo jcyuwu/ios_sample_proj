@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIImage.h>
 
 @interface Scene : NSObject <NSCoding>
 
@@ -15,6 +16,8 @@
 @property (nonatomic, copy) NSString *imageKey;
 @property (nonatomic, copy) NSString *introduction;
 @property (nonatomic, copy) NSString *openTime;
+@property (nonatomic, strong) UIImage *thumbnail;
 - (instancetype)initWithSceneName:(NSString *)name parkName:(NSString *)park imageKey:(NSString *)imageKey introduction:(NSString *)intro openTime:(NSString *)openTime;
+- (void)setThumbnailFromImage:(UIImage *)image;
 
 @end
