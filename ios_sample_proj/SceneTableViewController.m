@@ -85,7 +85,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scene cell" forIndexPath:indexPath];
     Scene *scene = [SceneStore sharedStore].arrParkToScenes[indexPath.section][indexPath.row];
     cell.textLabel.text = scene.name;
-    cell.imageView.image = [[ImageStore sharedStore] imageForKey:scene.imageKey];
+    if (!scene.thumbnail) {
+        UIImage *image = [[ImageStore sharedStore] imageForKey:scene.imageKey];
+        [scene setThumbnailFromImage:image];
+    }
+    cell.imageView.image = scene.thumbnail;
     
     return cell;
 }
