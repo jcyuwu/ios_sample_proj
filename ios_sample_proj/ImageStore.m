@@ -9,9 +9,10 @@
 #import "ImageStore.h"
 #import <UIKit/UIApplication.h>
 
-@interface ImageStore ()
+@interface ImageStore () <NSURLSessionDownloadDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *dictionary;
+@property (nonatomic) NSURLSession *session;
 
 @end
 
@@ -35,6 +36,9 @@
     self = [super init];
     if (self) {
         _dictionary = [[NSMutableDictionary alloc] init];
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+        
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(clearCache:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
     }
@@ -62,6 +66,12 @@
             self.dictionary[key] = result;
         } else {
             NSLog(@"error: unable to find %@", imagePath);
+            
+            NSString *requestString = key;
+            NSURL *url = [NSURL URLWithString:requestString];
+            NSURLRequest *req = [NSURLRequest requestWithURL:url];
+            NSURLSessionDownloadTask *task = [self.session downloadTaskWithRequest:req];
+            [task resume];
         }
     }
     return result;
@@ -79,8 +89,20 @@
 - (NSString *)imagePathForKey:(NSString *)key {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [documentDirectories firstObject];
-    return [documentDirectory stringByAppendingPathComponent:key];
-    
+    NSURL *url = [NSURL URLWithString:key];
+    NSString *fileName = [url.pathComponents lastObject];
+    return [documentDirectory stringByAppendingPathComponent:fileName];
+}
+
+- (void)URLSession:(nonnull NSURLSession *)session downloadTask:(nonnull NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(nonnull NSURL *)location { 
+    NSString *key = [downloadTask.originalRequest.URL absoluteString];
+    [self setImage:[UIImage imageWithContentsOfFile:location.path] forKey:key];
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"progressImageCallback" object:nil userInfo:@{@"key" : [downloadTask.originalRequest.URL absoluteString], @"progress" : [NSNumber numberWithDouble:1.0*totalBytesWritten/totalBytesExpectedToWrite]}];
+    });
 }
 
 @end

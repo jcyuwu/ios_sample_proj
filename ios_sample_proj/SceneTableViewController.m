@@ -9,6 +9,7 @@
 #import "SceneTableViewController.h"
 #import "SceneStore.h"
 #import "Scene.h"
+#import "ImageStore.h"
 
 @interface SceneTableViewController ()
 
@@ -40,10 +41,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(progressImageCallback:) name:@"progressImageCallback" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"progressImageCallback" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,6 +64,13 @@
     });
 }
 
+- (void)progressImageCallback:(NSNotification *)note {
+    NSDictionary *dict = note.userInfo;
+    NSString *key = [dict valueForKeyPath:@"key"];
+    NSNumber *progress = [dict valueForKeyPath:@"progress"];
+    NSLog(@"%@", dict);
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -75,6 +85,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scene cell" forIndexPath:indexPath];
     Scene *scene = [SceneStore sharedStore].arrParkToScenes[indexPath.section][indexPath.row];
     cell.textLabel.text = scene.name;
+    cell.imageView.image = [[ImageStore sharedStore] imageForKey:scene.imageKey];
     
     return cell;
 }
