@@ -14,6 +14,7 @@
 @property (nonatomic, copy) NSString *parkName;
 @property (nonatomic, copy) NSString *sceneKey;
 @property (nonatomic, copy) NSString *introduction;
-- (instancetype)initWithSceneName:(NSString *)name parkName:(NSString *)park introduction:(NSString *)intro;
+@property (nonatomic, copy) NSString *openTime;
+- (instancetype)initWithSceneName:(NSString *)name parkName:(NSString *)park introduction:(NSString *)intro openTime:(NSString *)openTime;
 
 @end

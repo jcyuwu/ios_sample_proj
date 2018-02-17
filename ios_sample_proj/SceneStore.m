@@ -113,7 +113,8 @@
                 NSString *name = [dict valueForKeyPath:@"Name"];
                 NSString *parkName = [dict valueForKeyPath:@"ParkName"];
                 NSString *introduction = [dict valueForKeyPath:@"Introduction"];
-                Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName introduction:introduction];
+                NSString *openTime = [dict valueForKeyPath:@"OpenTime"];
+                Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName introduction:introduction openTime:openTime];
                 [self.privateScenes addObject:scene];
                 NSLog(@"%@", scene.name);
             }
