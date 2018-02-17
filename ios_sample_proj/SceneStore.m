@@ -79,7 +79,7 @@
 }
 
 - (void)removeScene:(Scene *)scene {
-    NSString *key = scene.sceneKey;
+    NSString *key = scene.imageKey;
     [[ImageStore sharedStore] deleteImageForKey:key];
     [self.privateScenes removeObjectIdenticalTo:scene];
 }
@@ -112,9 +112,10 @@
             for (NSDictionary *dict in [jsonObject valueForKeyPath:@"result.results"]) {
                 NSString *name = [dict valueForKeyPath:@"Name"];
                 NSString *parkName = [dict valueForKeyPath:@"ParkName"];
+                NSString *imageKey = [dict valueForKeyPath:@"Image"];
                 NSString *introduction = [dict valueForKeyPath:@"Introduction"];
                 NSString *openTime = [dict valueForKeyPath:@"OpenTime"];
-                Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName introduction:introduction openTime:openTime];
+                Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName imageKey:imageKey introduction:introduction openTime:openTime];
                 [self.privateScenes addObject:scene];
                 NSLog(@"%@", scene.name);
             }
