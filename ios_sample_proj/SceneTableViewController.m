@@ -7,6 +7,7 @@
 //
 
 #import "SceneTableViewController.h"
+#import "SceneCell.h"
 #import "SceneStore.h"
 #import "Scene.h"
 #import "ImageStore.h"
@@ -37,6 +38,8 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //self.tableView.estimatedRowHeight = 44.0;
+    //self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -82,14 +85,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scene cell" forIndexPath:indexPath];
+    SceneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scene cell" forIndexPath:indexPath];
     Scene *scene = [SceneStore sharedStore].arrParkToScenes[indexPath.section][indexPath.row];
-    cell.textLabel.text = scene.name;
+    cell.nameLabel.text = scene.name;
+    cell.parkNameLabel.text = scene.parkName;
+    cell.introductionLabel.text = scene.introduction;
     if (!scene.thumbnail) {
         UIImage *image = [[ImageStore sharedStore] imageForKey:scene.imageKey];
         [scene setThumbnailFromImage:image];
     }
-    cell.imageView.image = scene.thumbnail;
+    cell.thumbnailView.image = scene.thumbnail;
     
     return cell;
 }

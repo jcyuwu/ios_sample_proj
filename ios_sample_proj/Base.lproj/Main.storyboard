@@ -33,13 +33,67 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scene cell" id="SWH-mk-U7B">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scene cell" id="SWH-mk-U7B" customClass="SceneCell">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SWH-mk-U7B" id="ESf-16-cHj">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SWH-mk-U7B" id="ESf-16-cHj">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eve-Mz-fAe">
+                                            <rect key="frame" x="8" y="0.0" width="40" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="3th-Xy-wI1"/>
+                                                <constraint firstAttribute="height" constant="40" id="Owa-S0-GhU"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="國立臺灣博物館" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJS-cu-zck">
+                                            <rect key="frame" x="56" y="0.0" width="311" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="djm-uh-Gd3"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="二二八和平公園" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-4j-kv7">
+                                            <rect key="frame" x="56" y="14" width="311" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="Zb9-JS-OIL"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4MK-eF-8aj">
+                                            <rect key="frame" x="8" y="26" width="359" height="17"/>
+                                            <mutableString key="text">國立臺灣博物館成立於1908年，清廷時期原址為天后宮，日據時期先後做為日軍傷兵收容所、臺北辦務署、臺灣總督府醫事學校宿舍，後因廟宇破舊，並於1905年拆除，在原地興工建設希臘多利亞式博物館，現天后宮柱腳現擺在公園楓香林內。國立臺灣博物館是臺灣歷史最悠久的博物館，當時的日本和西方國家，對於博物館的想像經常是從殖產興業的展示作為出發點，這也是為何國立臺灣博物館一開始是由總督府工商部門或殖產部門負責的背景。1908年臺博館前身「臺灣總督府民政部殖產局附屬博物館」的成立，是為了慶祝本島交通大動脈縱貫鐵路之南北全線通車，做為一系列空前盛大的通車儀式活動之一，準備透過展覽大力宣傳與介紹臺灣的建設。這部份的工作就交給殖產局，計畫展出臺灣本島各項產業的縮影，讓來賓對臺灣的概況能夠一目瞭然。</mutableString>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="iJS-cu-zck" firstAttribute="leading" secondItem="eve-Mz-fAe" secondAttribute="trailing" constant="8" id="9AN-BK-0vy"/>
+                                        <constraint firstItem="jxX-4j-kv7" firstAttribute="top" secondItem="iJS-cu-zck" secondAttribute="bottom" constant="1.5" id="Bsg-S7-YJQ"/>
+                                        <constraint firstItem="iJS-cu-zck" firstAttribute="top" secondItem="ESf-16-cHj" secondAttribute="top" constant="5" id="Bu8-XB-P6E"/>
+                                        <constraint firstItem="eve-Mz-fAe" firstAttribute="leading" secondItem="ESf-16-cHj" secondAttribute="leading" constant="8" id="Emu-DY-h6g"/>
+                                        <constraint firstItem="4MK-eF-8aj" firstAttribute="leading" secondItem="ESf-16-cHj" secondAttribute="leading" constant="8" id="IlX-bF-etI"/>
+                                        <constraint firstItem="4MK-eF-8aj" firstAttribute="top" secondItem="eve-Mz-fAe" secondAttribute="bottom" constant="5" id="JkX-Oh-rLx"/>
+                                        <constraint firstItem="eve-Mz-fAe" firstAttribute="top" secondItem="ESf-16-cHj" secondAttribute="top" constant="5" id="Mwt-pq-3d3"/>
+                                        <constraint firstAttribute="trailing" secondItem="jxX-4j-kv7" secondAttribute="trailing" constant="8" id="Qei-P4-twx"/>
+                                        <constraint firstAttribute="trailing" secondItem="4MK-eF-8aj" secondAttribute="trailing" constant="8" id="SWB-dn-MUY"/>
+                                        <constraint firstItem="jxX-4j-kv7" firstAttribute="leading" secondItem="eve-Mz-fAe" secondAttribute="trailing" constant="8" id="VEC-bj-1fa"/>
+                                        <constraint firstAttribute="bottom" secondItem="4MK-eF-8aj" secondAttribute="bottom" constant="5" id="gad-bh-CYZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="iJS-cu-zck" secondAttribute="trailing" constant="8" id="oTh-Qe-Ynb"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="introductionLabel" destination="4MK-eF-8aj" id="mvS-uu-Lla"/>
+                                    <outlet property="nameLabel" destination="iJS-cu-zck" id="TfM-b1-qwq"/>
+                                    <outlet property="parkNameLabel" destination="jxX-4j-kv7" id="XxF-kH-XI1"/>
+                                    <outlet property="thumbnailView" destination="eve-Mz-fAe" id="JIe-LO-Wmu"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -50,7 +104,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebK-Qw-q9N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="825" y="32"/>
+            <point key="canvasLocation" x="824.79999999999995" y="31.934032983508249"/>
         </scene>
     </scenes>
 </document>
