@@ -36,6 +36,8 @@
     self = [super init];
     if (self) {
         _dictionary = [[NSMutableDictionary alloc] init];
+        _indexPathsDict = [[NSMutableDictionary<NSString *, NSIndexPath *> alloc] init];
+        
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         _session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
         
@@ -98,12 +100,16 @@
     NSString *key = [downloadTask.originalRequest.URL absoluteString];
     NSData *imageData = [NSData dataWithContentsOfFile:location.path];
     [self setImage:[UIImage imageWithData:imageData] forKey:key];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"finishImageCallback" object:nil userInfo:@{@"key" : [downloadTask.originalRequest.URL absoluteString], @"indexPath" : self.indexPathsDict[downloadTask.originalRequest.URL.absoluteString]}];
+    });
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"progressImageCallback" object:nil userInfo:@{@"key" : [downloadTask.originalRequest.URL absoluteString], @"progress" : [NSNumber numberWithDouble:1.0*totalBytesWritten/totalBytesExpectedToWrite]}];
-    });
+    /*dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"progressImageCallback" object:nil userInfo:@{@"key" : [downloadTask.originalRequest.URL absoluteString], @"progress" : [NSNumber numberWithDouble:1.0*totalBytesWritten/totalBytesExpectedToWrite], @"indexPath" : self.indexPathsDict[downloadTask.originalRequest.URL.absoluteString]}];
+    });*/
 }
 
 @end

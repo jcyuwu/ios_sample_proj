@@ -45,11 +45,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(progressImageCallback:) name:@"progressImageCallback" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishImageCallback:) name:@"finishImageCallback" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"progressImageCallback" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"finishImageCallback" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,13 +65,22 @@
 
 - (void)fetchSceneCallback:(NSNotification *)note {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
+        
     });
 }
 
 - (void)progressImageCallback:(NSNotification *)note {
     NSDictionary *dict = note.userInfo;
     NSLog(@"%@", dict);
+}
+
+- (void)finishImageCallback:(NSNotification *)note {
+    NSDictionary *dict = note.userInfo;
+    NSIndexPath *indexPath = [dict valueForKeyPath:@"indexPath"];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    });
 }
 
 #pragma mark - Table view data source
@@ -89,6 +100,7 @@
     cell.parkNameLabel.text = scene.parkName;
     cell.introductionLabel.text = scene.introduction;
     
+    [ImageStore sharedStore].indexPathsDict[scene.imageKey] = indexPath;
     UIImage *image = [[ImageStore sharedStore] imageForKey:scene.imageKey];
     cell.thumbnailView.image = image;
     
