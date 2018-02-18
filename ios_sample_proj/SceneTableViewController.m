@@ -69,8 +69,6 @@
 
 - (void)progressImageCallback:(NSNotification *)note {
     NSDictionary *dict = note.userInfo;
-    NSString *key = [dict valueForKeyPath:@"key"];
-    NSNumber *progress = [dict valueForKeyPath:@"progress"];
     NSLog(@"%@", dict);
 }
 
@@ -90,11 +88,9 @@
     cell.nameLabel.text = scene.name;
     cell.parkNameLabel.text = scene.parkName;
     cell.introductionLabel.text = scene.introduction;
-    if (!scene.thumbnail) {
-        UIImage *image = [[ImageStore sharedStore] imageForKey:scene.imageKey];
-        [scene setThumbnailFromImage:image];
-    }
-    cell.thumbnailView.image = scene.thumbnail;
+    
+    UIImage *image = [[ImageStore sharedStore] imageForKey:scene.imageKey];
+    cell.thumbnailView.image = image;
     
     return cell;
 }

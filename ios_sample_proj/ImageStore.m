@@ -96,7 +96,8 @@
 
 - (void)URLSession:(nonnull NSURLSession *)session downloadTask:(nonnull NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(nonnull NSURL *)location { 
     NSString *key = [downloadTask.originalRequest.URL absoluteString];
-    [self setImage:[UIImage imageWithContentsOfFile:location.path] forKey:key];
+    NSData *imageData = [NSData dataWithContentsOfFile:location.path];
+    [self setImage:[UIImage imageWithData:imageData] forKey:key];
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
