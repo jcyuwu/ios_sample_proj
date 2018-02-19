@@ -28,27 +28,27 @@
         <scene sceneID="i9Q-kz-0Jp">
             <objects>
                 <tableViewController id="eGv-lb-8fQ" customClass="SceneTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ikc-Wg-Su2">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" id="ikc-Wg-Su2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scene cell" id="SWH-mk-U7B" customClass="SceneCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scene cell" rowHeight="150" id="SWH-mk-U7B" customClass="SceneCell">
+                                <rect key="frame" x="0.0" y="28" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SWH-mk-U7B" id="ESf-16-cHj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SWH-mk-U7B" id="ESf-16-cHj">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eve-Mz-fAe">
-                                            <rect key="frame" x="8" y="0.0" width="40" height="44"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eve-Mz-fAe">
+                                            <rect key="frame" x="8" y="5" width="80" height="80"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="3th-Xy-wI1"/>
-                                                <constraint firstAttribute="height" constant="40" id="Owa-S0-GhU"/>
+                                                <constraint firstAttribute="width" constant="80" id="3th-Xy-wI1"/>
+                                                <constraint firstAttribute="height" constant="80" id="Owa-S0-GhU"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="國立臺灣博物館" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJS-cu-zck">
-                                            <rect key="frame" x="56" y="0.0" width="311" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="國立臺灣博物館" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJS-cu-zck">
+                                            <rect key="frame" x="96" y="5" width="271" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="djm-uh-Gd3"/>
                                             </constraints>
@@ -56,8 +56,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="二二八和平公園" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-4j-kv7">
-                                            <rect key="frame" x="56" y="14" width="311" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二二八和平公園" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-4j-kv7">
+                                            <rect key="frame" x="96" y="27.5" width="271" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Zb9-JS-OIL"/>
                                             </constraints>
@@ -65,9 +65,9 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4MK-eF-8aj">
-                                            <rect key="frame" x="8" y="26" width="359" height="17"/>
-                                            <mutableString key="text">國立臺灣博物館成立於1908年，清廷時期原址為天后宮，日據時期先後做為日軍傷兵收容所、臺北辦務署、臺灣總督府醫事學校宿舍，後因廟宇破舊，並於1905年拆除，在原地興工建設希臘多利亞式博物館，現天后宮柱腳現擺在公園楓香林內。國立臺灣博物館是臺灣歷史最悠久的博物館，當時的日本和西方國家，對於博物館的想像經常是從殖產興業的展示作為出發點，這也是為何國立臺灣博物館一開始是由總督府工商部門或殖產部門負責的背景。1908年臺博館前身「臺灣總督府民政部殖產局附屬博物館」的成立，是為了慶祝本島交通大動脈縱貫鐵路之南北全線通車，做為一系列空前盛大的通車儀式活動之一，準備透過展覽大力宣傳與介紹臺灣的建設。這部份的工作就交給殖產局，計畫展出臺灣本島各項產業的縮影，讓來賓對臺灣的概況能夠一目瞭然。</mutableString>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4MK-eF-8aj">
+                                            <rect key="frame" x="8" y="90" width="359" height="54.5"/>
+                                            <string key="text">國立臺灣博物館成立於1908年，清廷時期原址為天后宮，日據時期先後做為日軍傷兵收容所、臺北辦務署、臺灣總督府醫事學校宿舍，後因廟宇破舊，並於1905年拆除，在原地興工建設希臘多利亞式博物館，現天后宮柱腳現擺在公園楓香林內。國立臺灣博物館是臺灣歷史最悠久的博物館，當時的日本和西方國家，對於博物館的想像經常是從殖產興業的展示作為出發點，這也是為何國立臺灣博物館一開始是由總督府工商部門或殖產部門負責的背景。1908年臺博館前身「臺灣總督府民政部殖產局附屬博物館」的成立，是為了慶祝本島交通大動脈縱貫鐵路之南北全線通車，做為一系列空前盛大的通車儀式活動之一，準備透過展覽大力宣傳與介紹臺灣的建設。這部份的工作就交給殖產局，計畫展出臺灣本島各項產業的縮影，讓來賓對臺灣的概況能夠一目瞭然。</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>

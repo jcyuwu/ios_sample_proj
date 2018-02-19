@@ -7,11 +7,12 @@
 //
 
 #import "ImageStore.h"
-#import <UIKit/UIApplication.h>
+#import <UIKit/UIKit.h>
 
 @interface ImageStore () <NSURLSessionDownloadDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *dictionary;
+@property (nonatomic, strong) NSMutableDictionary *tasksDict;
 @property (nonatomic) NSURLSession *session;
 
 @end
@@ -36,6 +37,7 @@
     self = [super init];
     if (self) {
         _dictionary = [[NSMutableDictionary alloc] init];
+        _tasksDict = [[NSMutableDictionary alloc] init];
         _indexPathsDict = [[NSMutableDictionary<NSString *, NSIndexPath *> alloc] init];
         
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -52,8 +54,31 @@
     [self.dictionary removeAllObjects];
 }
 
+
+- (UIImage *)thumbnailFromImage:(UIImage *)image {
+    CGSize originImageSize = image.size;
+    CGRect newRect = CGRectMake(0, 0, 80, 80);
+    float ratio = MAX(newRect.size.width / originImageSize.width, newRect.size.height / originImageSize.height);
+    
+    UIGraphicsBeginImageContextWithOptions(newRect.size, NO, 0.0);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:newRect cornerRadius:5.0];
+    [path addClip];
+    
+    CGRect projectRect;
+    projectRect.size.width = ratio * originImageSize.width;
+    projectRect.size.height = ratio * originImageSize.height;
+    projectRect.origin.x = (newRect.size.width - projectRect.size.width) / 2.0;
+    projectRect.origin.y = (newRect.size.height - projectRect.size.height) / 2.0;
+    
+    [image drawInRect:projectRect];
+    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    return smallImage;
+}
+
 - (void)setImage:(UIImage *)image forKey:(NSString *)key {
-    self.dictionary[key] = image;
+    self.dictionary[key] = [self thumbnailFromImage:image];
     NSString *imagePath = [self imagePathForKey:key];
     NSData *data = UIImageJPEGRepresentation(image, 0.5);
     [data writeToFile:imagePath atomically:YES];
@@ -65,15 +90,19 @@
         NSString *imagePath = [self imagePathForKey:key];
         result = [UIImage imageWithContentsOfFile:imagePath];
         if (result) {
-            self.dictionary[key] = result;
+            self.dictionary[key] = [self thumbnailFromImage:result];
         } else {
             NSLog(@"error: unable to find %@", imagePath);
-            
-            NSString *requestString = key;
-            NSURL *url = [NSURL URLWithString:requestString];
-            NSURLRequest *req = [NSURLRequest requestWithURL:url];
-            NSURLSessionDownloadTask *task = [self.session downloadTaskWithRequest:req];
-            [task resume];
+            if ((![self.tasksDict valueForKey:key])&&(self.tasksDict.allKeys.count<=5)) {
+                NSLog(@"downloading to %@", imagePath);
+                
+                NSString *requestString = key;
+                NSURL *url = [NSURL URLWithString:requestString];
+                NSURLRequest *req = [NSURLRequest requestWithURL:url];
+                NSURLSessionDownloadTask *task = [self.session downloadTaskWithRequest:req];
+                [self.tasksDict setValue:task forKey:key];
+                [task resume];
+            }
         }
     }
     return result;
@@ -100,6 +129,7 @@
     NSString *key = [downloadTask.originalRequest.URL absoluteString];
     NSData *imageData = [NSData dataWithContentsOfFile:location.path];
     [self setImage:[UIImage imageWithData:imageData] forKey:key];
+    [self.tasksDict removeObjectForKey:key];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"finishImageCallback" object:nil userInfo:@{@"key" : [downloadTask.originalRequest.URL absoluteString], @"indexPath" : self.indexPathsDict[downloadTask.originalRequest.URL.absoluteString]}];
@@ -110,6 +140,11 @@
     /*dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"progressImageCallback" object:nil userInfo:@{@"key" : [downloadTask.originalRequest.URL absoluteString], @"progress" : [NSNumber numberWithDouble:1.0*totalBytesWritten/totalBytesExpectedToWrite], @"indexPath" : self.indexPathsDict[downloadTask.originalRequest.URL.absoluteString]}];
     });*/
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+    NSString *key = [task.originalRequest.URL absoluteString];
+    [self.tasksDict removeObjectForKey:key];
 }
 
 @end
