@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dzY-6g-dm7">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,6 +22,251 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-7" y="32"/>
+        </scene>
+        <!--臺北市公園景點-->
+        <scene sceneID="i9Q-kz-0Jp">
+            <objects>
+                <tableViewController id="eGv-lb-8fQ" customClass="SceneTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" id="ikc-Wg-Su2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scene cell" rowHeight="150" id="SWH-mk-U7B" customClass="SceneCell">
+                                <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SWH-mk-U7B" id="ESf-16-cHj">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eve-Mz-fAe">
+                                            <rect key="frame" x="8" y="5" width="80" height="80"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="3th-Xy-wI1"/>
+                                                <constraint firstAttribute="height" constant="80" id="Owa-S0-GhU"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="國立臺灣博物館" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJS-cu-zck">
+                                            <rect key="frame" x="96" y="5" width="271" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="djm-uh-Gd3"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二二八和平公園" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-4j-kv7">
+                                            <rect key="frame" x="96" y="27.5" width="271" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="Zb9-JS-OIL"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4MK-eF-8aj">
+                                            <rect key="frame" x="8" y="90" width="359" height="54.5"/>
+                                            <string key="text">國立臺灣博物館成立於1908年，清廷時期原址為天后宮，日據時期先後做為日軍傷兵收容所、臺北辦務署、臺灣總督府醫事學校宿舍，後因廟宇破舊，並於1905年拆除，在原地興工建設希臘多利亞式博物館，現天后宮柱腳現擺在公園楓香林內。國立臺灣博物館是臺灣歷史最悠久的博物館，當時的日本和西方國家，對於博物館的想像經常是從殖產興業的展示作為出發點，這也是為何國立臺灣博物館一開始是由總督府工商部門或殖產部門負責的背景。1908年臺博館前身「臺灣總督府民政部殖產局附屬博物館」的成立，是為了慶祝本島交通大動脈縱貫鐵路之南北全線通車，做為一系列空前盛大的通車儀式活動之一，準備透過展覽大力宣傳與介紹臺灣的建設。這部份的工作就交給殖產局，計畫展出臺灣本島各項產業的縮影，讓來賓對臺灣的概況能夠一目瞭然。</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="iJS-cu-zck" firstAttribute="leading" secondItem="eve-Mz-fAe" secondAttribute="trailing" constant="8" id="9AN-BK-0vy"/>
+                                        <constraint firstItem="jxX-4j-kv7" firstAttribute="top" secondItem="iJS-cu-zck" secondAttribute="bottom" constant="1.5" id="Bsg-S7-YJQ"/>
+                                        <constraint firstItem="iJS-cu-zck" firstAttribute="top" secondItem="ESf-16-cHj" secondAttribute="top" constant="5" id="Bu8-XB-P6E"/>
+                                        <constraint firstItem="eve-Mz-fAe" firstAttribute="leading" secondItem="ESf-16-cHj" secondAttribute="leading" constant="8" id="Emu-DY-h6g"/>
+                                        <constraint firstItem="4MK-eF-8aj" firstAttribute="leading" secondItem="ESf-16-cHj" secondAttribute="leading" constant="8" id="IlX-bF-etI"/>
+                                        <constraint firstItem="4MK-eF-8aj" firstAttribute="top" secondItem="eve-Mz-fAe" secondAttribute="bottom" constant="5" id="JkX-Oh-rLx"/>
+                                        <constraint firstItem="eve-Mz-fAe" firstAttribute="top" secondItem="ESf-16-cHj" secondAttribute="top" constant="5" id="Mwt-pq-3d3"/>
+                                        <constraint firstAttribute="trailing" secondItem="jxX-4j-kv7" secondAttribute="trailing" constant="8" id="Qei-P4-twx"/>
+                                        <constraint firstAttribute="trailing" secondItem="4MK-eF-8aj" secondAttribute="trailing" constant="8" id="SWB-dn-MUY"/>
+                                        <constraint firstItem="jxX-4j-kv7" firstAttribute="leading" secondItem="eve-Mz-fAe" secondAttribute="trailing" constant="8" id="VEC-bj-1fa"/>
+                                        <constraint firstAttribute="bottom" secondItem="4MK-eF-8aj" secondAttribute="bottom" constant="5" id="gad-bh-CYZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="iJS-cu-zck" secondAttribute="trailing" constant="8" id="oTh-Qe-Ynb"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="introductionLabel" destination="4MK-eF-8aj" id="mvS-uu-Lla"/>
+                                    <outlet property="nameLabel" destination="iJS-cu-zck" id="TfM-b1-qwq"/>
+                                    <outlet property="parkNameLabel" destination="jxX-4j-kv7" id="XxF-kH-XI1"/>
+                                    <outlet property="thumbnailView" destination="eve-Mz-fAe" id="JIe-LO-Wmu"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="eGv-lb-8fQ" id="q3A-Pf-y7N"/>
+                            <outlet property="delegate" destination="eGv-lb-8fQ" id="PeB-QZ-k67"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="臺北市公園景點" id="Wav-FO-3ny">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="NdG-GJ-PbB"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ebK-Qw-q9N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1511" y="31"/>
+        </scene>
+        <!--Scene Detail View Controller-->
+        <scene sceneID="Qan-n8-xSR">
+            <objects>
+                <viewController storyboardIdentifier="SceneDetailViewController" id="cQX-9d-Fos" customClass="SceneDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P5Y-Xw-Gs2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GSs-Oc-E3S">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1UA-He-hMc" userLabel="Container View">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="688"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6KI-Hl-HbL" userLabel="Content1">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="300" id="GZ1-eP-y9y"/>
+                                                    <constraint firstAttribute="height" constant="5" id="SMr-tY-2aY"/>
+                                                </constraints>
+                                            </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7fd-c3-hSf">
+                                                <rect key="frame" x="0.0" y="10" width="300" height="128"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="2Yh-1h-1Ct"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二二八和平公園" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lM2-nA-Aum">
+                                                <rect key="frame" x="10" y="146" width="280" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="ifj-xN-SsY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="國立臺灣博物館" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yK4-C8-lQW">
+                                                <rect key="frame" x="10" y="175" width="280" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="opM-qR-VV4"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="開放時間：00:00~24:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFG-2b-nrb">
+                                                <rect key="frame" x="10" y="204" width="280" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="FU8-OT-UFe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-c0-V0R">
+                                                <rect key="frame" x="10" y="233" width="280" height="301"/>
+                                                <mutableString key="text">國立臺灣博物館成立於1908年，清廷時期原址為天后宮，日據時期先後做為日軍傷兵收容所、臺北辦務署、臺灣總督府醫事學校宿舍，後因廟宇破舊，並於1905年拆除，在原地興工建設希臘多利亞式博物館，現天后宮柱腳現擺在公園楓香林內。國立臺灣博物館是臺灣歷史最悠久的博物館，當時的日本和西方國家，對於博物館的想像經常是從殖產興業的展示作為出發點，這也是為何國立臺灣博物館一開始是由總督府工商部門或殖產部門負責的背景。1908年臺博館前身「臺灣總督府民政部殖產局附屬博物館」的成立，是為了慶祝本島交通大動脈縱貫鐵路之南北全線通車，做為一系列空前盛大的通車儀式活動之一，準備透過展覽大力宣傳與介紹臺灣的建設。這部份的工作就交給殖產局，計畫展出臺灣本島各項產業的縮影，讓來賓對臺灣的概況能夠一目瞭然。</mutableString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="相關景點" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLZ-w0-XOq">
+                                                <rect key="frame" x="10" y="542" width="280" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="bp1-Rr-bEr"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFS-nH-2Kc" userLabel="Relative View">
+                                                <rect key="frame" x="0.0" y="568" width="300" height="100"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="0xt-aG-ZFf"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="JLZ-w0-XOq" firstAttribute="leading" secondItem="1UA-He-hMc" secondAttribute="leading" constant="10" id="6mi-wx-NAP"/>
+                                            <constraint firstItem="LEY-c0-V0R" firstAttribute="leading" secondItem="1UA-He-hMc" secondAttribute="leading" constant="10" id="8x5-pJ-8LW"/>
+                                            <constraint firstAttribute="trailing" secondItem="LEY-c0-V0R" secondAttribute="trailing" constant="10" id="9Z8-bN-DeT"/>
+                                            <constraint firstAttribute="trailing" secondItem="MFG-2b-nrb" secondAttribute="trailing" constant="10" id="Adq-pe-7e6"/>
+                                            <constraint firstItem="MFG-2b-nrb" firstAttribute="leading" secondItem="1UA-He-hMc" secondAttribute="leading" constant="10" id="DES-xH-zBW"/>
+                                            <constraint firstItem="LEY-c0-V0R" firstAttribute="top" secondItem="MFG-2b-nrb" secondAttribute="bottom" constant="8" id="F3D-RV-U8Q"/>
+                                            <constraint firstItem="6KI-Hl-HbL" firstAttribute="top" secondItem="1UA-He-hMc" secondAttribute="top" id="Jga-Um-fn0"/>
+                                            <constraint firstAttribute="trailing" secondItem="NFS-nH-2Kc" secondAttribute="trailing" id="NBf-3O-RaV"/>
+                                            <constraint firstAttribute="trailing" secondItem="6KI-Hl-HbL" secondAttribute="trailing" id="O4d-5B-7Cp"/>
+                                            <constraint firstItem="7fd-c3-hSf" firstAttribute="top" secondItem="6KI-Hl-HbL" secondAttribute="bottom" constant="5" id="Snh-Tt-evq"/>
+                                            <constraint firstItem="yK4-C8-lQW" firstAttribute="top" secondItem="lM2-nA-Aum" secondAttribute="bottom" constant="8" id="Usw-ua-QPC"/>
+                                            <constraint firstItem="NFS-nH-2Kc" firstAttribute="top" secondItem="JLZ-w0-XOq" secondAttribute="bottom" constant="5" id="XES-yP-ZyX"/>
+                                            <constraint firstAttribute="trailing" secondItem="7fd-c3-hSf" secondAttribute="trailing" id="ayZ-5a-KeJ"/>
+                                            <constraint firstItem="yK4-C8-lQW" firstAttribute="leading" secondItem="1UA-He-hMc" secondAttribute="leading" constant="10" id="bA7-5O-LuM"/>
+                                            <constraint firstItem="7fd-c3-hSf" firstAttribute="leading" secondItem="1UA-He-hMc" secondAttribute="leading" id="dLi-mX-h74"/>
+                                            <constraint firstItem="MFG-2b-nrb" firstAttribute="top" secondItem="yK4-C8-lQW" secondAttribute="bottom" constant="8" id="fqu-F9-7Oz"/>
+                                            <constraint firstAttribute="bottom" secondItem="NFS-nH-2Kc" secondAttribute="bottom" constant="20" id="hkI-s4-FXy"/>
+                                            <constraint firstItem="lM2-nA-Aum" firstAttribute="leading" secondItem="1UA-He-hMc" secondAttribute="leading" constant="10" id="kh5-f7-cpm"/>
+                                            <constraint firstItem="lM2-nA-Aum" firstAttribute="top" secondItem="7fd-c3-hSf" secondAttribute="bottom" constant="8" id="mP9-7L-fnN"/>
+                                            <constraint firstAttribute="trailing" secondItem="yK4-C8-lQW" secondAttribute="trailing" constant="10" id="pLL-kx-wq4"/>
+                                            <constraint firstItem="6KI-Hl-HbL" firstAttribute="leading" secondItem="1UA-He-hMc" secondAttribute="leading" id="t0R-bs-n3T"/>
+                                            <constraint firstItem="JLZ-w0-XOq" firstAttribute="top" secondItem="LEY-c0-V0R" secondAttribute="bottom" constant="8" id="tZO-0R-L8a"/>
+                                            <constraint firstItem="NFS-nH-2Kc" firstAttribute="leading" secondItem="1UA-He-hMc" secondAttribute="leading" id="veA-oU-qEI"/>
+                                            <constraint firstAttribute="trailing" secondItem="JLZ-w0-XOq" secondAttribute="trailing" constant="10" id="xdy-fq-ddK"/>
+                                            <constraint firstAttribute="trailing" secondItem="lM2-nA-Aum" secondAttribute="trailing" constant="10" id="yjL-SB-LSA"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1UA-He-hMc" secondAttribute="trailing" id="XlM-TD-3QU"/>
+                                    <constraint firstItem="1UA-He-hMc" firstAttribute="leading" secondItem="GSs-Oc-E3S" secondAttribute="leading" id="apq-9x-99H"/>
+                                    <constraint firstAttribute="bottom" secondItem="1UA-He-hMc" secondAttribute="bottom" id="oPH-bY-yxA"/>
+                                    <constraint firstItem="1UA-He-hMc" firstAttribute="top" secondItem="GSs-Oc-E3S" secondAttribute="top" id="xHA-6g-6j7"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ieu-i3-cFI" firstAttribute="bottom" secondItem="GSs-Oc-E3S" secondAttribute="bottom" id="9V7-lf-WWm"/>
+                            <constraint firstItem="Ieu-i3-cFI" firstAttribute="trailing" secondItem="GSs-Oc-E3S" secondAttribute="trailing" id="g2P-Xc-crq"/>
+                            <constraint firstItem="GSs-Oc-E3S" firstAttribute="leading" secondItem="Ieu-i3-cFI" secondAttribute="leading" id="iSj-Op-IuN"/>
+                            <constraint firstItem="GSs-Oc-E3S" firstAttribute="top" secondItem="Ieu-i3-cFI" secondAttribute="top" id="qFl-rN-hsQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ieu-i3-cFI"/>
+                    </view>
+                    <connections>
+                        <outlet property="content1HeightConstraint" destination="SMr-tY-2aY" id="QxZ-UU-Yak"/>
+                        <outlet property="content1WidthConstraint" destination="GZ1-eP-y9y" id="qYI-qj-xyV"/>
+                        <outlet property="imageView" destination="7fd-c3-hSf" id="bn0-e8-vWk"/>
+                        <outlet property="imageViewHeightConstraint" destination="2Yh-1h-1Ct" id="Zbu-Bh-tno"/>
+                        <outlet property="introductionLabel" destination="LEY-c0-V0R" id="gpx-oN-7O2"/>
+                        <outlet property="nameLabel" destination="yK4-C8-lQW" id="fi0-bY-Dsp"/>
+                        <outlet property="openTimeLabel" destination="MFG-2b-nrb" id="x7q-C3-SgT"/>
+                        <outlet property="parkNameLabel" destination="lM2-nA-Aum" id="RBB-ve-mng"/>
+                        <outlet property="relativeView" destination="NFS-nH-2Kc" id="IXH-O0-jSN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eOZ-rO-U9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2196" y="29.23538230884558"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0DL-ci-YIM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dzY-6g-dm7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="w1Y-L7-ZT7">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eGv-lb-8fQ" kind="relationship" relationship="rootViewController" id="RdA-gq-9Hy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gmg-z0-HFE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="824" y="31.484257871064472"/>
         </scene>
     </scenes>
 </document>
