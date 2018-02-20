@@ -88,7 +88,8 @@
     UIImage *result = self.dictionary[key];
     if (!result) {
         NSString *imagePath = [self imagePathForKey:key];
-        result = [UIImage imageWithContentsOfFile:imagePath];
+        NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+        result = [UIImage imageWithData:imageData];
         if (result) {
             self.dictionary[key] = [self thumbnailFromImage:result];
         } else {

@@ -238,6 +238,7 @@
                         <outlet property="content1HeightConstraint" destination="SMr-tY-2aY" id="QxZ-UU-Yak"/>
                         <outlet property="content1WidthConstraint" destination="GZ1-eP-y9y" id="qYI-qj-xyV"/>
                         <outlet property="imageView" destination="7fd-c3-hSf" id="bn0-e8-vWk"/>
+                        <outlet property="imageViewHeightConstraint" destination="2Yh-1h-1Ct" id="Zbu-Bh-tno"/>
                         <outlet property="introductionLabel" destination="LEY-c0-V0R" id="gpx-oN-7O2"/>
                         <outlet property="nameLabel" destination="yK4-C8-lQW" id="fi0-bY-Dsp"/>
                         <outlet property="openTimeLabel" destination="MFG-2b-nrb" id="x7q-C3-SgT"/>
