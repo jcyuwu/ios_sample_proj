@@ -77,25 +77,43 @@
     return smallImage;
 }
 
+- (NSString *)thumbnailPathForKey:(NSString *)key {
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [documentDirectories firstObject];
+    NSURL *url = [NSURL URLWithString:key];
+    NSString *fileName = [url.pathComponents lastObject];
+    return [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"ss%@", fileName]];
+}
+
 - (void)setImage:(UIImage *)image forKey:(NSString *)key {
     self.dictionary[key] = [self thumbnailFromImage:image];
+    
+    NSString *path = [self thumbnailPathForKey:key];
+    NSData *data = UIImageJPEGRepresentation([self thumbnailFromImage:image], 0.5);
+    [data writeToFile:path atomically:YES];
+    
     NSString *imagePath = [self imagePathForKey:key];
-    NSData *data = UIImageJPEGRepresentation(image, 0.5);
-    [data writeToFile:imagePath atomically:YES];
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    [imageData writeToFile:imagePath atomically:YES];
 }
 
 - (UIImage *)imageForKey:(NSString *)key {
     UIImage *result = self.dictionary[key];
     if (!result) {
-        NSString *imagePath = [self imagePathForKey:key];
-        NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
-        result = [UIImage imageWithData:imageData];
+        NSString *path = [self thumbnailPathForKey:key];
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        result = [UIImage imageWithData:data];
+        if (!result) {
+            NSString *imagePath = [self imagePathForKey:key];
+            NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+            result = [UIImage imageWithData:imageData];
+        }
         if (result) {
             self.dictionary[key] = [self thumbnailFromImage:result];
         } else {
-            NSLog(@"error: unable to find %@", imagePath);
+            NSLog(@"error: unable to find %@", [self imagePathForKey:key]);
             if ((![self.tasksDict valueForKey:key])&&(self.tasksDict.allKeys.count<=5)) {
-                NSLog(@"downloading to %@", imagePath);
+                NSLog(@"downloading to %@", [self imagePathForKey:key]);
                 
                 NSString *requestString = key;
                 NSURL *url = [NSURL URLWithString:requestString];
