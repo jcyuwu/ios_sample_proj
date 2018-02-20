@@ -11,6 +11,7 @@
 #import "SceneStore.h"
 #import "Scene.h"
 #import "ImageStore.h"
+#import "SceneDetailViewController.h"
 
 @interface SceneTableViewController ()
 
@@ -110,6 +111,13 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     Scene *scene = [[SceneStore sharedStore].arrParkToScenes[section] firstObject];
     return scene.parkName;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SceneDetailViewController *sdvc = (SceneDetailViewController *)[sb instantiateViewControllerWithIdentifier:@"SceneDetailViewController"];
+    sdvc.indexPath = indexPath;
+    [self.navigationController pushViewController:sdvc animated:NO];
 }
 
 /*
