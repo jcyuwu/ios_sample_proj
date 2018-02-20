@@ -76,8 +76,13 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    self.content1WidthConstraint.constant = self.view.bounds.size.width;
-    self.imageViewHeightConstraint.constant = self.view.bounds.size.height/3.0;
+    if ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) {
+        self.content1WidthConstraint.constant = self.view.bounds.size.width;
+        self.imageViewHeightConstraint.constant = self.view.bounds.size.height/3.0;
+    } else {
+        self.content1WidthConstraint.constant = self.view.bounds.size.width;
+        self.imageViewHeightConstraint.constant = self.view.bounds.size.height*2/3.0;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
