@@ -30,6 +30,7 @@
 - (void)loadView {
     [super loadView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchSceneCallback:) name:@"fetchSceneCallback" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishImageCallback:) name:@"finishImageCallback" object:nil];
     [[SceneStore sharedStore] fetchScene];
 }
 
@@ -46,13 +47,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(progressImageCallback:) name:@"progressImageCallback" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishImageCallback:) name:@"finishImageCallback" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"progressImageCallback" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"finishImageCallback" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,6 +61,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fetchSceneCallback" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"finishImageCallback" object:nil];
 }
 
 - (void)fetchSceneCallback:(NSNotification *)note {

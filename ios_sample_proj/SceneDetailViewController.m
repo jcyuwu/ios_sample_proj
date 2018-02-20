@@ -15,8 +15,14 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *content1WidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *content1HeightConstraint;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewHeightConstraint;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *parkNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *openTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *introductionLabel;
+@property (weak, nonatomic) IBOutlet UIView *relativeView;
 
 @end
 
@@ -45,6 +51,33 @@
     NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
     UIImage *image = [UIImage imageWithData:imageData];
     self.imageView.image = image;
+    
+    NSArray *arr = [SceneStore sharedStore].arrParkToScenes[self.indexPath.section];
+    UIScrollView *sv = [[UIScrollView alloc] initWithFrame:self.relativeView.bounds];
+    for (int i = 0; i != arr.count; i++) {
+        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(i*100, 0, 80, 80)];
+        iv.backgroundColor = [UIColor grayColor];
+        
+        Scene *s = arr[i];
+        [ImageStore sharedStore].indexPathsDict[s.imageKey] = [NSIndexPath indexPathForRow:i inSection:self.indexPath.section];
+        iv.image = [[ImageStore sharedStore] imageForKey:s.imageKey];
+        
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(i*100, 85, 80, 15)];
+        l.text = s.name;
+        
+        [sv addSubview:l];
+        [sv addSubview:iv];
+        if (i == (arr.count-1)) {
+            sv.contentSize = CGSizeMake((i+1)*100, 80);
+        }
+    }
+    [self.relativeView addSubview:sv];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.content1WidthConstraint.constant = self.view.bounds.size.width;
+    self.imageViewHeightConstraint.constant = self.view.bounds.size.height/3.0;
 }
 
 - (void)didReceiveMemoryWarning {
