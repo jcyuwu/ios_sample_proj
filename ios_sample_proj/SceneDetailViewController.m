@@ -10,6 +10,9 @@
 
 @interface SceneDetailViewController ()
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *content1WidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *content1HeightConstraint;
+
 @end
 
 @implementation SceneDetailViewController
@@ -17,6 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.content1WidthConstraint.constant = self.view.bounds.size.width;
+    
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.imageView setContentHuggingPriority:200 forAxis:UILayoutConstraintAxisVertical];
+    [self.imageView setContentCompressionResistancePriority:700 forAxis:UILayoutConstraintAxisVertical];
 }
 
 - (void)didReceiveMemoryWarning {
