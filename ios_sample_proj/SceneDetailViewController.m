@@ -45,8 +45,10 @@
     self.arrRelativeImageView = [[NSMutableArray alloc] init];
     NSArray *arr = [SceneStore sharedStore].arrParkToScenes[self.indexPath.section];
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:self.relativeView.bounds];
+    sv.translatesAutoresizingMaskIntoConstraints = NO;
+    UIImageView *prev = nil;
     for (int i = 0; i != arr.count; i++) {
-        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(i*100, 0, 80, 80)];
+        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(i*85, 0, 80, 80)];
         iv.backgroundColor = [UIColor grayColor];
         [self.arrRelativeImageView addObject:iv];
         
@@ -54,16 +56,29 @@
         [ImageStore sharedStore].indexPathsDict[s.imageKey] = [NSIndexPath indexPathForRow:i inSection:self.indexPath.section];
         iv.image = [[ImageStore sharedStore] imageForKey:s.imageKey];
         
-        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(i*100, 85, 80, 15)];
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(i*85, 85, 80, 15)];
         l.text = s.name;
         
         [sv addSubview:l];
         [sv addSubview:iv];
+        [sv addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[iv]" options:0 metrics:nil views:@{@"iv":iv}]];
+        if (!prev) {
+            [sv addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[iv]" options:0 metrics:nil views:@{@"iv":iv}]];
+        } else {
+            [sv addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[prev]-(5)-[iv]" options:0 metrics:nil views:@{@"iv":iv, @"prev":prev}]];
+        }
+        prev = iv;
+        
         if (i == (arr.count-1)) {
-            sv.contentSize = CGSizeMake((i+1)*100, 80);
+            //sv.contentSize = CGSizeMake((i+1)*100, 80);
         }
     }
+    [sv addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[prev]-(20)-|" options:0 metrics:nil views:@{@"prev":prev}]];
+    [sv addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[prev]-(0)-|" options:0 metrics:nil views:@{@"prev":prev}]];
+    
     [self.relativeView addSubview:sv];
+    [self.relativeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[sv]|" options:0 metrics:nil views:@{@"sv":sv}]];
+    [self.relativeView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sv]|" options:0 metrics:nil views:@{@"sv":sv}]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
