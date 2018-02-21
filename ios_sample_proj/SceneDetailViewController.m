@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *openTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *introductionLabel;
 @property (weak, nonatomic) IBOutlet UIView *relativeView;
+@property (strong, nonatomic) NSMutableArray *arrRelativeImageView;
 
 @end
 
@@ -41,11 +42,13 @@
     
     [self configureView];
     
+    self.arrRelativeImageView = [[NSMutableArray alloc] init];
     NSArray *arr = [SceneStore sharedStore].arrParkToScenes[self.indexPath.section];
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:self.relativeView.bounds];
     for (int i = 0; i != arr.count; i++) {
         UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(i*100, 0, 80, 80)];
         iv.backgroundColor = [UIColor grayColor];
+        [self.arrRelativeImageView addObject:iv];
         
         Scene *s = arr[i];
         [ImageStore sharedStore].indexPathsDict[s.imageKey] = [NSIndexPath indexPathForRow:i inSection:self.indexPath.section];
@@ -104,6 +107,13 @@
     self.imageView.image = image;
 }
 
+- (void)updateRelativeImageViewWithIndex:(NSInteger)index {
+    UIImageView *iv = self.arrRelativeImageView[index];
+    Scene *s = [SceneStore sharedStore].arrParkToScenes[self.indexPath.section][index];
+    [ImageStore sharedStore].indexPathsDict[s.imageKey] = [NSIndexPath indexPathForRow:index inSection:self.indexPath.section];
+    iv.image = [[ImageStore sharedStore] imageForKey:s.imageKey];
+}
+
 - (void)finishImageCallback:(NSNotification *)note {
     NSDictionary *dict = note.userInfo;
     NSIndexPath *indexPath = [dict valueForKeyPath:@"indexPath"];
@@ -111,6 +121,11 @@
     if ([indexPath isEqual:self.indexPath]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self configureView];
+            [self updateRelativeImageViewWithIndex:indexPath.row];
+        });
+    } else if (indexPath.section == self.indexPath.section) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateRelativeImageViewWithIndex:indexPath.row];
         });
     }
 }
