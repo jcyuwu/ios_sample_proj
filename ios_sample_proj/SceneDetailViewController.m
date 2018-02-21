@@ -11,7 +11,7 @@
 #import "Scene.h"
 #import "ImageStore.h"
 
-@interface SceneDetailViewController ()
+@interface SceneDetailViewController () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *content1WidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *content1HeightConstraint;
@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *introductionLabel;
 @property (weak, nonatomic) IBOutlet UIView *relativeView;
 @property (strong, nonatomic) NSMutableArray *arrRelativeImageView;
+@property (strong, nonatomic) UIScrollView *relativeScrollView;
 
 @end
 
@@ -46,6 +47,8 @@
     NSArray *arr = [SceneStore sharedStore].arrParkToScenes[self.indexPath.section];
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:self.relativeView.bounds];
     sv.translatesAutoresizingMaskIntoConstraints = NO;
+    sv.delegate = self;
+    self.relativeScrollView = sv;
     UIImageView *prev = nil;
     for (int i = 0; i != arr.count; i++) {
         UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(i*85, 0, 80, 80)];
@@ -57,6 +60,7 @@
         iv.image = [[ImageStore sharedStore] imageForKey:s.imageKey];
         
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(i*85, 85, 80, 15)];
+        l.font = [UIFont systemFontOfSize:13];
         l.text = s.name;
         
         [sv addSubview:l];
@@ -142,6 +146,19 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self updateRelativeImageViewWithIndex:indexPath.row];
         });
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if ([scrollView isEqual:self.relativeScrollView]) {
+        for (int i = 0; i != self.arrRelativeImageView.count; i++) {
+            UIImageView *iv = self.arrRelativeImageView[i];
+            if (!iv.image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self updateRelativeImageViewWithIndex:i];
+                });
+            }
+        }
     }
 }
 
