@@ -39,18 +39,7 @@
     [self.imageView setContentHuggingPriority:200 forAxis:UILayoutConstraintAxisVertical];
     [self.imageView setContentCompressionResistancePriority:700 forAxis:UILayoutConstraintAxisVertical];
     
-    Scene *scene = [SceneStore sharedStore].arrParkToScenes[self.indexPath.section][self.indexPath.row];
-    self.nameLabel.text = scene.name;
-    self.parkNameLabel.text = scene.parkName;
-    self.openTimeLabel.text = [NSString stringWithFormat:@"開放時間：%@", scene.openTime];
-    self.introductionLabel.text = scene.introduction;
-    
-    [ImageStore sharedStore].indexPathsDict[scene.imageKey] = self.indexPath;
-    [[ImageStore sharedStore] imageForKey:scene.imageKey];
-    NSString *imagePath = [[ImageStore sharedStore] imagePathForKey:scene.imageKey];
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
-    UIImage *image = [UIImage imageWithData:imageData];
-    self.imageView.image = image;
+    [self configureView];
     
     NSArray *arr = [SceneStore sharedStore].arrParkToScenes[self.indexPath.section];
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:self.relativeView.bounds];
@@ -74,6 +63,16 @@
     [self.relativeView addSubview:sv];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishImageCallback:) name:@"finishImageCallback" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"finishImageCallback" object:nil];
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     if ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) {
@@ -88,6 +87,32 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)configureView {
+    Scene *scene = [SceneStore sharedStore].arrParkToScenes[self.indexPath.section][self.indexPath.row];
+    self.nameLabel.text = scene.name;
+    self.parkNameLabel.text = scene.parkName;
+    self.openTimeLabel.text = [NSString stringWithFormat:@"開放時間：%@", scene.openTime];
+    self.introductionLabel.text = scene.introduction;
+    
+    [ImageStore sharedStore].indexPathsDict[scene.imageKey] = self.indexPath;
+    [[ImageStore sharedStore] imageForKey:scene.imageKey];
+    NSString *imagePath = [[ImageStore sharedStore] imagePathForKey:scene.imageKey];
+    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    UIImage *image = [UIImage imageWithData:imageData];
+    self.imageView.image = image;
+}
+
+- (void)finishImageCallback:(NSNotification *)note {
+    NSDictionary *dict = note.userInfo;
+    NSIndexPath *indexPath = [dict valueForKeyPath:@"indexPath"];
+    
+    if ([indexPath isEqual:self.indexPath]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self configureView];
+        });
+    }
 }
 
 /*
