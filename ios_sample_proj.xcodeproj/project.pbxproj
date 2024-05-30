@@ -318,7 +318,7 @@
 				DEVELOPMENT_TEAM = Z893JWGS7C;
 				INFOPLIST_FILE = ios_sample_proj/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "KyosJhong.ios-sample-proj";
+				PRODUCT_BUNDLE_IDENTIFIER = "jcyu256.ios-sample-proj";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -332,7 +332,7 @@
 				DEVELOPMENT_TEAM = Z893JWGS7C;
 				INFOPLIST_FILE = ios_sample_proj/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "KyosJhong.ios-sample-proj";
+				PRODUCT_BUNDLE_IDENTIFIER = "jcyu256.ios-sample-proj";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

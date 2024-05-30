@@ -16,5 +16,6 @@
 + (instancetype)sharedStore;
 - (Scene *)createScene;
 - (void)fetchScene;
+- (NSString *)sceneArchivePath;
 
 @end

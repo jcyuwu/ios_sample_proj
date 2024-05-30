@@ -103,17 +103,63 @@
 
 - (void)fetchScene {
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self sceneArchivePath]]) {
-        NSString *requestString = @"http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=bf073841-c734-49bf-a97f-3757a6013812";
+        NSString *requestString = @"https://www.travel.taipei/open-api/zh-tw/Attractions/All?page=1";
         NSURL *url = [NSURL URLWithString:requestString];
-        NSURLRequest *req = [NSURLRequest requestWithURL:url];
+        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+        [req setHTTPMethod:@"GET"];
+        [req setValue:@"application/json" forHTTPHeaderField:@"accept"];
         NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
+            NSLog(@"%@", response);
             NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            for (NSDictionary *dict in [jsonObject valueForKeyPath:@"result.results"]) {
-                NSString *name = [dict valueForKeyPath:@"Name"];
-                NSString *parkName = [dict valueForKeyPath:@"ParkName"];
-                NSString *imageKey = [dict valueForKeyPath:@"Image"];
-                NSString *introduction = [dict valueForKeyPath:@"Introduction"];
+            NSLog(@"%@", jsonObject);
+            for (NSDictionary *dict in [jsonObject valueForKeyPath:@"data"]) {
+                NSString *name = [dict valueForKeyPath:@"name"];
+                NSString *parkName = [dict valueForKeyPath:@"distric"];
+                NSArray *imageArr = [dict valueForKeyPath:@"images"];
+                NSString *imageKey = @"";
+                if (imageArr.count > 0) {
+                    NSString *imageSrc = [imageArr[0] valueForKeyPath:@"src"];
+                    NSLog(@"ddd%@", imageSrc);
+                    imageKey = [NSString stringWithFormat:@"%@", imageSrc];
+                }
+                NSString *introduction = [dict valueForKeyPath:@"introduction"];
+                NSString *openTime = [dict valueForKeyPath:@"open_time"];
+                Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName imageKey:imageKey introduction:introduction openTime:openTime];
+                [self.privateScenes addObject:scene];
+                NSLog(@"%@", scene.name);
+            }
+            
+            [self configureParkToScenes];
+            [self saveChanges];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"fetchSceneCallback" object:nil userInfo:nil];
+            });
+            
+        }];
+        [dataTask resume];
+    }
+}
+
+- (void)fetchScene2 {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[self sceneArchivePath]]) {
+        NSString *requestString = @"https://tdx.transportdata.tw/api/basic/v2/Tourism/ScenicSpot/Taipei?%24top=30&%24format=JSON";
+        NSURL *url = [NSURL URLWithString:requestString];
+        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+        [req setHTTPMethod:@"GET"];
+        [req setValue:@"application/json" forHTTPHeaderField:@"accept"];
+        NSLog(@"%@", [req allHTTPHeaderFields]);
+        NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            
+            NSLog(@"%@", response);
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"%@", jsonObject);
+            for (NSDictionary *dict in [jsonObject valueForKeyPath:@"data"]) {
+                NSString *name = [dict valueForKeyPath:@"ScenicSpotName"];
+                NSString *parkName = [dict valueForKeyPath:@"distric"];
+                NSArray *imageKey = [dict valueForKeyPath:@"Picture.PictureUrl1"];
+                NSString *introduction = [dict valueForKeyPath:@"DescriptionDetail"];
                 NSString *openTime = [dict valueForKeyPath:@"OpenTime"];
                 Scene *scene = [[Scene alloc] initWithSceneName:name parkName:parkName imageKey:imageKey introduction:introduction openTime:openTime];
                 [self.privateScenes addObject:scene];

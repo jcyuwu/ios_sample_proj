@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dzY-6g-dm7">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dzY-6g-dm7">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,15 +15,15 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-7" y="32"/>
         </scene>
-        <!--臺北市公園景點-->
+        <!--臺北市景點-->
         <scene sceneID="i9Q-kz-0Jp">
             <objects>
                 <tableViewController id="eGv-lb-8fQ" customClass="SceneTableViewController" sceneMemberID="viewController">
@@ -34,10 +33,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scene cell" rowHeight="150" id="SWH-mk-U7B" customClass="SceneCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SWH-mk-U7B" id="ESf-16-cHj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eve-Mz-fAe">
@@ -66,7 +65,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4MK-eF-8aj">
-                                            <rect key="frame" x="8" y="90" width="359" height="54.5"/>
+                                            <rect key="frame" x="8" y="90" width="359" height="55"/>
                                             <string key="text">國立臺灣博物館成立於1908年，清廷時期原址為天后宮，日據時期先後做為日軍傷兵收容所、臺北辦務署、臺灣總督府醫事學校宿舍，後因廟宇破舊，並於1905年拆除，在原地興工建設希臘多利亞式博物館，現天后宮柱腳現擺在公園楓香林內。國立臺灣博物館是臺灣歷史最悠久的博物館，當時的日本和西方國家，對於博物館的想像經常是從殖產興業的展示作為出發點，這也是為何國立臺灣博物館一開始是由總督府工商部門或殖產部門負責的背景。1908年臺博館前身「臺灣總督府民政部殖產局附屬博物館」的成立，是為了慶祝本島交通大動脈縱貫鐵路之南北全線通車，做為一系列空前盛大的通車儀式活動之一，準備透過展覽大力宣傳與介紹臺灣的建設。這部份的工作就交給殖產局，計畫展出臺灣本島各項產業的縮影，讓來賓對臺灣的概況能夠一目瞭然。</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
@@ -101,7 +100,7 @@
                             <outlet property="delegate" destination="eGv-lb-8fQ" id="PeB-QZ-k67"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="臺北市公園景點" id="Wav-FO-3ny">
+                    <navigationItem key="navigationItem" title="臺北市景點" id="Wav-FO-3ny">
                         <barButtonItem key="backBarButtonItem" title="返回" id="NdG-GJ-PbB"/>
                     </navigationItem>
                 </tableViewController>
@@ -165,7 +164,7 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-c0-V0R">
                                                 <rect key="frame" x="10" y="233" width="280" height="301"/>
-                                                <mutableString key="text">國立臺灣博物館成立於1908年，清廷時期原址為天后宮，日據時期先後做為日軍傷兵收容所、臺北辦務署、臺灣總督府醫事學校宿舍，後因廟宇破舊，並於1905年拆除，在原地興工建設希臘多利亞式博物館，現天后宮柱腳現擺在公園楓香林內。國立臺灣博物館是臺灣歷史最悠久的博物館，當時的日本和西方國家，對於博物館的想像經常是從殖產興業的展示作為出發點，這也是為何國立臺灣博物館一開始是由總督府工商部門或殖產部門負責的背景。1908年臺博館前身「臺灣總督府民政部殖產局附屬博物館」的成立，是為了慶祝本島交通大動脈縱貫鐵路之南北全線通車，做為一系列空前盛大的通車儀式活動之一，準備透過展覽大力宣傳與介紹臺灣的建設。這部份的工作就交給殖產局，計畫展出臺灣本島各項產業的縮影，讓來賓對臺灣的概況能夠一目瞭然。</mutableString>
+                                                <string key="text">國立臺灣博物館成立於1908年，清廷時期原址為天后宮，日據時期先後做為日軍傷兵收容所、臺北辦務署、臺灣總督府醫事學校宿舍，後因廟宇破舊，並於1905年拆除，在原地興工建設希臘多利亞式博物館，現天后宮柱腳現擺在公園楓香林內。國立臺灣博物館是臺灣歷史最悠久的博物館，當時的日本和西方國家，對於博物館的想像經常是從殖產興業的展示作為出發點，這也是為何國立臺灣博物館一開始是由總督府工商部門或殖產部門負責的背景。1908年臺博館前身「臺灣總督府民政部殖產局附屬博物館」的成立，是為了慶祝本島交通大動脈縱貫鐵路之南北全線通車，做為一系列空前盛大的通車儀式活動之一，準備透過展覽大力宣傳與介紹臺灣的建設。這部份的工作就交給殖產局，計畫展出臺灣本島各項產業的縮影，讓來賓對臺灣的概況能夠一目瞭然。</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -225,6 +224,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ieu-i3-cFI"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ieu-i3-cFI" firstAttribute="bottom" secondItem="GSs-Oc-E3S" secondAttribute="bottom" id="9V7-lf-WWm"/>
@@ -232,7 +232,6 @@
                             <constraint firstItem="GSs-Oc-E3S" firstAttribute="leading" secondItem="Ieu-i3-cFI" secondAttribute="leading" id="iSj-Op-IuN"/>
                             <constraint firstItem="GSs-Oc-E3S" firstAttribute="top" secondItem="Ieu-i3-cFI" secondAttribute="top" id="qFl-rN-hsQ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Ieu-i3-cFI"/>
                     </view>
                     <connections>
                         <outlet property="content1HeightConstraint" destination="SMr-tY-2aY" id="QxZ-UU-Yak"/>
