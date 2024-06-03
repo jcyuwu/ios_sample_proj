@@ -58,6 +58,10 @@
         Scene *s = arr[i];
         [ImageStore sharedStore].indexPathsDict[s.imageKey] = [NSIndexPath indexPathForRow:i inSection:self.indexPath.section];
         iv.image = [[ImageStore sharedStore] imageForKey:s.imageKey];
+        iv.userInteractionEnabled = true;
+        iv.tag = i;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRelativeImageView:)];
+        [iv addGestureRecognizer:tap];
         
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(i*85, 85, 80, 15)];
         l.font = [UIFont systemFontOfSize:13];
@@ -109,6 +113,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)tapRelativeImageView:(UITapGestureRecognizer *)sender {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.view.tag inSection:self.indexPath.section];
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SceneDetailViewController *sdvc = (SceneDetailViewController *)[sb instantiateViewControllerWithIdentifier:@"SceneDetailViewController"];
+    sdvc.indexPath = indexPath;
+    //[self.navigationController pushViewController:sdvc animated:NO];
+    NSArray *vcs = @[self.navigationController.viewControllers[0], sdvc];
+    [self.navigationController setViewControllers:vcs animated:NO];
 }
 
 - (void)configureView {
