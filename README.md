@@ -2,7 +2,7 @@
 
 一個objective-c的範例程式碼
 
-使用taipei open api來取得台北旅遊景點的相關資料
+使用tdx open api來取得台北旅遊景點的相關資料
 
 <br/>
 
