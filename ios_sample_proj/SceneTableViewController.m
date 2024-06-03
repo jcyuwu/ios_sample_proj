@@ -31,7 +31,8 @@
     [super loadView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchSceneCallback:) name:@"fetchSceneCallback" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishImageCallback:) name:@"finishImageCallback" object:nil];
-    [[SceneStore sharedStore] fetchScene];
+    [[SceneStore sharedStore] getAccessToken];
+    //[[SceneStore sharedStore] fetchScene];
 }
 
 - (void)viewDidLoad {

@@ -16,6 +16,7 @@
 @property (nonatomic) NSMutableDictionary<NSString *, NSMutableArray *> *dictParkToScenes;
 @property (nonatomic) NSArray<NSMutableArray *> *privateArrParkToScenes;
 @property (nonatomic) NSURLSession *session;
+@property (nonatomic) NSString *accessToken;
 
 @end
 
@@ -101,7 +102,7 @@
     return scene;
 }
 
-- (void)fetchScene {
+- (void)fetchScene2 {
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self sceneArchivePath]]) {
         NSString *requestString = @"https://www.travel.taipei/open-api/zh-tw/Attractions/All?page=1";
         NSURL *url = [NSURL URLWithString:requestString];
@@ -142,22 +143,23 @@
     }
 }
 
-- (void)fetchScene2 {
+- (void)fetchScene {
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self sceneArchivePath]]) {
         NSString *requestString = @"https://tdx.transportdata.tw/api/basic/v2/Tourism/ScenicSpot/Taipei?%24top=30&%24format=JSON";
         NSURL *url = [NSURL URLWithString:requestString];
         NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
         [req setHTTPMethod:@"GET"];
         [req setValue:@"application/json" forHTTPHeaderField:@"accept"];
+        [req setValue:[NSString stringWithFormat:@"Bearer %@", self.accessToken] forHTTPHeaderField:@"authorization"];
         NSLog(@"%@", [req allHTTPHeaderFields]);
         NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
             NSLog(@"%@", response);
             NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSLog(@"%@", jsonObject);
-            for (NSDictionary *dict in [jsonObject valueForKeyPath:@"data"]) {
+            for (NSDictionary *dict in jsonObject) {
                 NSString *name = [dict valueForKeyPath:@"ScenicSpotName"];
-                NSString *parkName = [dict valueForKeyPath:@"distric"];
+                NSString *parkName = [dict valueForKeyPath:@"ZipCode"];
                 NSArray *imageKey = [dict valueForKeyPath:@"Picture.PictureUrl1"];
                 NSString *introduction = [dict valueForKeyPath:@"DescriptionDetail"];
                 NSString *openTime = [dict valueForKeyPath:@"OpenTime"];
@@ -173,6 +175,29 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"fetchSceneCallback" object:nil userInfo:nil];
             });
             
+        }];
+        [dataTask resume];
+    }
+}
+
+- (void)getAccessToken {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[self sceneArchivePath]]) {
+        NSString *requestString = @"https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token";
+        NSURL *url = [NSURL URLWithString:requestString];
+        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+        [req setHTTPMethod:@"POST"];
+        [req setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+        NSString *body = @"grant_type=client_credentials&client_id=jcyu256-686285df-ec3e-4e90&client_secret=ad07cfd6-9580-44a9-95dd-6b6aa9dbb826";
+        [req setHTTPBody: [body dataUsingEncoding:NSUTF8StringEncoding]];
+        NSLog(@"%@", [req allHTTPHeaderFields]);
+        NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            
+            NSLog(@"%@", response);
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"%@", jsonObject);
+            
+            self.accessToken = [jsonObject valueForKeyPath:@"access_token"];
+            [self fetchScene];
         }];
         [dataTask resume];
     }
