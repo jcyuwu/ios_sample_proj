@@ -14,3 +14,6 @@
 
 最後呈現圖文資訊於自訂佈局的表單頁面，並能在滑動時快速的載入
 
+<br/>
+
+<img src="https://github.com/jcyuwu/flutter_sample/blob/main/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20-%202024-07-03%20at%2011.27.56.png" width="30%" height="30%"> <img src="https://github.com/jcyuwu/flutter_sample/blob/main/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20-%202024-07-03%20at%2011.27.56.png" width="30%" height="30%">
